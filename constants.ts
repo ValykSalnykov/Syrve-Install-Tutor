@@ -1,0 +1,217 @@
+
+import { VersionItem, TutorialStep } from './types';
+
+export const MOCK_VERSIONS: VersionItem[] = [
+  // Installed versions
+  { id: 'v_full_rms_1', version: '9.1.7017.0', type: 'RMS', category: 'Full', installed: true },
+  { id: 'v_folder_rms_1', version: '9.1.7017.0', type: 'RMS', category: 'Folder', installed: true },
+  
+  // Available RMS
+  { id: 'v_folder_rms_2', version: '8.8.8001.0', type: 'RMS', category: 'Folder' },
+  { id: 'v_folder_rms_3', version: '8.6.8011.0', type: 'RMS', category: 'Folder' },
+
+  // Available Chain
+  { id: 'v_full_chain_1', version: '9.1.7017.0', type: 'Chain', category: 'Full', installed: true },
+  { id: 'v_folder_chain_1', version: '9.0.8008.0', type: 'Chain', category: 'Folder' },
+  { id: 'v_folder_chain_2', version: '8.9.9006.0', type: 'Chain', category: 'Folder' },
+];
+
+export const TUTORIAL_STEPS: TutorialStep[] = [
+  // --- Auth Steps (Indices 0-4) ---
+  {
+    id: 'auth-1',
+    title: 'Вхід у систему',
+    targetId: 'auth-input-id',
+    message: 'Введіть ідентифікатор користувача (мін. 3 символи).',
+    position: 'right',
+    actionRequired: 'input',
+  },
+  {
+    id: 'auth-2',
+    title: 'Отримання коду',
+    targetId: 'auth-btn-get-code',
+    message: 'Натисніть кнопку, щоб отримати код доступу.',
+    position: 'right',
+    actionRequired: 'click',
+  },
+  {
+    id: 'auth-3',
+    title: 'Telegram сповіщення',
+    targetId: 'telegram-notification', 
+    message: 'Вам прийшло повідомлення в Telegram від бота verifudao: "Ваш код верифікації: OW4O6B". Цей код можна використати для входу в систему.',
+    position: 'left',
+    actionRequired: 'none',
+  },
+  {
+    id: 'auth-4',
+    title: 'Введення коду',
+    targetId: 'auth-input-code',
+    message: 'Введіть отриманий код (OW4O6B) у поле підтвердження.',
+    position: 'left', 
+    actionRequired: 'input',
+  },
+  {
+    id: 'auth-5',
+    title: 'Підтвердження',
+    targetId: 'auth-btn-confirm',
+    message: 'Натисніть "Підтвердити" для входу.',
+    position: 'left',
+    actionRequired: 'click',
+  },
+
+  // --- Main Screen Steps (Indices 5-17) ---
+  {
+    id: 'main-status',
+    title: 'Стан системи',
+    targetId: 'main-status-bar',
+    message: 'Тут буде інформація системи для перевірки стабільності установки та наявності необхідних компонентів.',
+    position: 'top',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-config',
+    title: 'Налаштування',
+    targetId: 'main-header-config',
+    message: 'Перевірте адресу сервера та порт. Оберіть тип встановлення (RMS або Chain).',
+    position: 'bottom',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-info-buttons',
+    title: 'Дії',
+    targetId: 'main-action-buttons',
+    message: 'Кнопки "Повне встановлення" та "Встановити OfficeFolder" додають відповідні завдання у чергу.',
+    position: 'bottom',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-full-install',
+    title: 'Спроба встановлення',
+    targetId: 'btn-full-install',
+    message: 'Натисніть "Повне встановлення", щоб додати завдання в чергу.',
+    position: 'top',
+    actionRequired: 'click',
+  },
+  {
+    id: 'main-warning',
+    title: 'Попередження',
+    targetId: 'modal-warning-ok',
+    message: 'Може бути таке, що вже встановлена версія. Це попередження про це, але завдання все одно поставиться в чергу при натисканні ОК.',
+    position: 'center',
+    actionRequired: 'click',
+  },
+  {
+    id: 'main-versions-info',
+    title: 'Встановлені версії',
+    targetId: 'main-versions-grid',
+    message: 'Ви можете створити ярлик для конкретної вже встановленної версії.',
+    position: 'top',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-select-version',
+    title: 'Вибір версії',
+    targetId: 'main-version-btn-v_folder_rms_2', 
+    message: 'Оберіть версію RMS 8.8.8001.0 та натисніть "Ярлик".',
+    position: 'right',
+    actionRequired: 'click',
+  },
+  {
+    id: 'main-shortcut-name',
+    title: 'Налаштування ярлика',
+    targetId: 'modal-shortcut-name',
+    message: 'Ви можете змінити назву ярлика у цьому полі.',
+    position: 'bottom',
+    actionRequired: 'input',
+  },
+  {
+    id: 'main-add-shortcut',
+    title: 'Додавання ярлика',
+    targetId: 'modal-shortcut-btn',
+    message: 'Перевірте сервер, порт і назву ярлика та натисніть "Додати". Це додасть завдання створення ярлика в чергу.',
+    position: 'right',
+    actionRequired: 'click',
+  },
+  {
+    id: 'main-queue-start',
+    title: 'Запуск черги',
+    targetId: 'main-queue-panel',
+    message: 'У черзі завдання відображають ID, Тип (чорним шрифтом), Сервер та Статус (очікує, виконується, скасоване, готово). Натисніть "Запустити".',
+    position: 'top',
+    actionRequired: 'click',
+  },
+  {
+    id: 'main-queue-controls',
+    title: 'Пауза та продовження',
+    targetId: 'btn-queue-pause',
+    message: 'Кнопки "Пауза" та "Продовжити" дозволяють тимчасово зупинити виконання черги (наприклад, для перевірки помилок) без скасування завдань.',
+    position: 'top',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-queue-cancel',
+    title: 'Скасування завдань',
+    targetId: 'btn-queue-cancel',
+    message: 'Кнопка "Скасувати обране" видаляє виділене завдання з черги. Це працює лише для завдань, які ще не почали виконуватися (status "Waiting").',
+    position: 'top',
+    actionRequired: 'none',
+  },
+  {
+    id: 'main-tray-exit',
+    title: 'Завершення',
+    targetId: 'main-window-frame',
+    message: 'Закриття вікна (кнопка «х») відправляє застосунок у трей.\nУ меню трея: Restore — повернути вікно, Exit — повністю завершити роботу.\nДодаток автоматично закриється, коли виконаються всі задачі в черзі.',
+    position: 'center',
+    actionRequired: 'none',
+  },
+
+  // --- Web Monitor Steps (Indices 18+) ---
+  {
+    id: 'web-overview',
+    title: 'Веб-моніторинг',
+    targetId: 'web-monitor-container',
+    message: 'На цьому екрані відображено веб-інтерфейс (Dao hub) для відстеження статусу завдань.',
+    position: 'center',
+    actionRequired: 'none',
+  },
+  {
+    id: 'web-statuses',
+    title: 'Статуси завдань',
+    targetId: 'web-pool-list',
+    message: 'Є три статуси:\n🔵 Синій — в процесі установки (таймер показує час).\n🔴 Червоний — виникла помилка, потрібна перевірка.\n🟢 Зелений — установка завершена успішно.',
+    position: 'left',
+    actionRequired: 'none',
+  },
+  {
+    id: 'web-details',
+    title: 'Деталі завдання',
+    targetId: 'btn-details-error',
+    message: 'Натисніть на стрілку у картці завдання, щоб відкрити детальне вікно з послідовністю установки або описом помилки.',
+    position: 'left',
+    actionRequired: 'click',
+  },
+  {
+    id: 'web-details-info',
+    title: 'Вікно історії',
+    targetId: 'web-details-popup-content',
+    message: 'Це вікно показує повну історію установки для вибраного завдання. Тут можна побачити код помилки, час виникнення та інші технічні деталі для діагностики.',
+    position: 'center',
+    actionRequired: 'none',
+  },
+  {
+    id: 'web-archive',
+    title: 'Архівування',
+    targetId: 'btn-archive-success',
+    message: 'Кнопка "Архів" прибирає успішно виконану або завершену задачу з поточного пулу та відправляє її в архів.',
+    position: 'left',
+    actionRequired: 'click',
+  },
+  {
+    id: 'web-pip',
+    title: 'PIP Mode',
+    targetId: 'btn-pip-mode',
+    message: 'Натисніть "PIP Mode", щоб згорнути список пулу в компактне вікно.\n(Працює тільки при наявності встановленого розширення).',
+    position: 'left',
+    actionRequired: 'click',
+  },
+];
