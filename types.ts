@@ -33,4 +33,5 @@ export interface ScreenProps {
   onInteract: (id: string) => void;
   autoTriggerStepId: string | null;
   currentStepId?: string;
+  onLogin?: () => void;
 }

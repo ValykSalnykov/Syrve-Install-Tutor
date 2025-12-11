@@ -167,64 +167,65 @@ export const MainScreen: React.FC<ScreenProps> = ({ onInteract, autoTriggerStepI
     <div className="flex flex-col h-full w-full bg-[#f0f0f0] text-sm select-none font-sans overflow-hidden" id="main-window-frame">
       
       {/* --- Header Config --- */}
-      <div id="main-header-config" className="px-4 py-2 bg-white border-b border-gray-300 shadow-sm shrink-0">
-        <div className="text-gray-500 text-xs mb-1">Параметри встановлення</div>
+      <div id="main-header-config" className="px-2 py-2 bg-[#f0f0f0] border-b border-gray-300 shrink-0 text-xs">
+        <div className="text-black mb-2">Параметри встановлення</div>
         
-        {/* Server/Port Row */}
-        <div className="flex gap-4 items-center mb-2">
-          <div className="flex-1 flex items-center gap-2">
-            <span className="w-12 text-gray-700">Сервер:</span>
+        {/* Row 1: Server and Port */}
+        <div className="flex items-center mb-2">
+            <div className="w-20 text-gray-700">Сервер:</div>
             <input 
               type="text" 
               value={server} 
               onChange={(e) => setServer(e.target.value)}
-              className="flex-1 border border-gray-300 p-1.5 text-sm bg-white focus:border-blue-500 outline-none shadow-inner text-black" 
+              className="flex-[2] border border-gray-400 p-0.5 px-2 bg-white focus:border-blue-500 outline-none h-6 text-black shadow-inner" 
             />
-          </div>
-          <div className="w-48 flex items-center gap-2">
-            <span className="text-gray-700">Порт:</span>
-            <input 
+            <div className="w-16 text-right text-gray-700 mr-2 ml-2">Порт:</div>
+             <input 
               type="text" 
               value={port} 
               onChange={(e) => setPort(e.target.value)}
-              className="w-full border border-gray-300 p-1.5 text-sm bg-white focus:border-blue-500 outline-none shadow-inner text-black" 
+              className="flex-1 border border-gray-400 p-0.5 px-2 bg-white focus:border-blue-500 outline-none h-6 text-black shadow-inner" 
             />
-          </div>
         </div>
 
-        {/* Type/Shortcut Row */}
-        <div className="flex items-center justify-between">
-          <div className="flex gap-6 items-center">
-            <span className="text-gray-700">Тип:</span>
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input 
-                type="radio" 
-                checked={installType === 'RMS'} 
-                onChange={() => setInstallType('RMS')}
-                className="w-4 h-4 text-blue-600" 
-              />
-              <span className={installType === 'RMS' ? 'font-semibold text-black' : 'text-gray-700'}>RMS</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input 
-                type="radio" 
-                checked={installType === 'Chain'} 
-                onChange={() => setInstallType('Chain')}
-                className="w-4 h-4 text-blue-600" 
-              />
-              <span className={installType === 'Chain' ? 'font-semibold text-black' : 'text-gray-700'}>Chain</span>
-            </label>
-          </div>
-          
-          <div className="flex-1 flex items-center justify-end gap-2 ml-8">
-            <span className="text-gray-700">Назва ярлика:</span>
+        {/* Row 2: Shortcut Name and Type */}
+        <div className="flex items-center">
+            <div className="w-20 text-gray-700">Назва ярлика:</div>
             <input 
               type="text" 
               value="Syrve Office" 
               readOnly 
-              className="w-64 border border-gray-300 p-1.5 text-sm bg-gray-50 text-gray-500 shadow-inner" 
+              className="flex-[2] border border-gray-400 p-0.5 px-2 bg-white focus:border-blue-500 outline-none h-6 text-black shadow-inner" 
             />
-          </div>
+             <div className="w-16 text-right text-gray-700 mr-2 ml-2">Тип:</div>
+             <div className="flex-1 flex items-center gap-3">
+                 <label className="flex items-center gap-1 text-gray-700 cursor-pointer">
+                    <input 
+                        type="radio" 
+                        checked={installType === 'RMS'} 
+                        onChange={() => setInstallType('RMS')}
+                        className="w-3 h-3" 
+                    />
+                    <span>RMS</span>
+                 </label>
+                  <label className="flex items-center gap-1 text-gray-700 cursor-pointer">
+                    <input 
+                        type="radio" 
+                        checked={installType === 'Chain'} 
+                        onChange={() => setInstallType('Chain')}
+                        className="w-3 h-3" 
+                    />
+                    <span>Chain</span>
+                 </label>
+                  <label className="flex items-center gap-1 text-gray-700 cursor-not-allowed">
+                    <input 
+                        type="radio" 
+                        disabled
+                        className="w-3 h-3" 
+                    />
+                    <span>Call Center</span>
+                 </label>
+             </div>
         </div>
       </div>
 
@@ -380,24 +381,63 @@ export const MainScreen: React.FC<ScreenProps> = ({ onInteract, autoTriggerStepI
           </div>
       </div>
 
-      {/* --- System Status Bar --- */}
-      <div id="main-status-bar" className="bg-[#f0f0f0] border-t border-gray-400 p-2 text-xs shrink-0">
-          <div className="mb-1 text-gray-600 font-semibold">Стан системи</div>
-          <div className="flex items-center gap-4 mb-2">
-              <span className="w-32 text-gray-700">Перевірки перед встановленням</span>
-              <button className="ml-auto bg-gradient-to-b from-white to-gray-200 border border-gray-400 text-black px-3 py-0.5 rounded-sm hover:bg-gray-200 shadow-sm">Оновити</button>
+      {/* --- System Status Bar (Redesigned) --- */}
+      <div id="main-status-bar" className="bg-[#f0f0f0] border-t border-gray-400 text-xs shrink-0 flex flex-col">
+          {/* Status Message Line */}
+          <div className="bg-[#e0e0e0] px-2 py-1 border-b border-white text-black font-normal">
+              Готово
           </div>
-          <div className="flex items-center gap-2">
-              <span className="w-12 font-semibold text-gray-700">Диск C:</span>
-              <div className="flex-1 h-4 bg-gray-200 border border-gray-400 relative rounded-sm overflow-hidden shadow-inner">
-                  <div className="h-full bg-green-500 transition-all duration-1000" style={{ width: `${diskProgress}%` }}></div>
+
+          {/* Section Header */}
+          <div className="px-2 py-1 border-t border-gray-300">
+              <div className="text-black mb-1">Стан системи</div>
+              <div className="h-px bg-gray-300 w-full mb-1"></div>
+          </div>
+
+          {/* Checks Row */}
+          <div className="px-2 pb-1 flex justify-between items-center">
+              <span className="text-black">Перевірки перед встановленням</span>
+              <button className="px-3 py-0.5 bg-gradient-to-b from-white to-gray-100 border border-gray-300 rounded-sm shadow-sm hover:bg-gray-50 active:translate-y-px text-black">
+                  Оновити
+              </button>
+          </div>
+
+          {/* Disk Row */}
+          <div className="px-2 pb-2 flex items-center">
+              <span className="font-semibold text-black mr-2">Диск C:</span>
+              <div className="flex-1 mr-2 relative h-5">
+                   <div className="absolute inset-0 bg-[#e5e5e5] border border-gray-400">
+                       <div className="h-full bg-[#4caf50] transition-all duration-1000" style={{ width: `${diskProgress}%` }}></div>
+                   </div>
               </div>
-              <span className="text-green-700 font-medium w-40 text-right">Вільно 57.8 ГБ з 237.2 ГБ</span>
+              <span className="text-green-700 text-[11px] whitespace-nowrap mr-6">Вільно 55.3 ГБ з 237.2 ГБ</span>
+              
+              <div className="flex flex-col text-[11px] w-48 border-l border-gray-300 pl-4">
+                  <span className="text-black mb-0.5">Перезавантаження</span>
+                  <span className="text-green-600 font-medium">Перезавантаження не потрібне</span>
+              </div>
           </div>
-          <div className="mt-1 flex gap-4 text-gray-500">
-             <span>Windows 10 build 10.0.26200</span>
-             <span>.NET Framework 4.8.1</span>
-             <span className="ml-auto text-blue-600 hover:underline cursor-pointer">Отримати 4.8.1</span>
+
+          {/* System Info Row */}
+          <div className="px-2 pb-2 flex gap-4">
+              <div className="flex-1">
+                   <div className="text-black font-semibold mb-0.5">Windows</div>
+                   <div className="text-green-700">Windows 10 build 10.0.26200 (SP0, AMD64)</div>
+              </div>
+              <div className="flex-1 flex justify-between items-start">
+                   <div>
+                      <div className="text-black font-semibold mb-0.5">.NET Framework</div>
+                      <div className="text-green-700">.NET Framework 4.8.1</div>
+                   </div>
+                   <button className="text-blue-600 hover:underline">Отримати 4.8.1</button>
+              </div>
+          </div>
+
+          {/* Log Button */}
+          <div className="px-0 pb-0 mt-1">
+               <button className="w-full bg-gradient-to-b from-white to-gray-100 border-t border-gray-300 py-1 text-black hover:bg-gray-50 active:bg-gray-200">
+                   Показати журнал
+               </button>
           </div>
       </div>
 

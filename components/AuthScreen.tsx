@@ -88,7 +88,7 @@ export const AuthScreen: React.FC<ScreenProps> = ({ onLogin, onInteract, autoTri
         <div className="w-full">
           
           <div className="mb-4">
-            <label className="block text-sm text-gray-700 mb-2">Ідентифікація користувача:</label>
+            <label className="block text-sm text-gray-700 mb-2">Ведіть PIN код:</label>
             <input 
               id="auth-input-id"
               type="password"
